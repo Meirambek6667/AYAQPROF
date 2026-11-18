@@ -1,0 +1,18 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "AYAQPROF",
+  "orientation": "any",
+  "scope": "/https://meirambek6667.github.io/AYAQPROF/",
+  "short_name": "/AYAQPROF/",
+  "start_url": "/https://meirambek6667.github.io/AYAQPROF/",
+  "theme_color": "#ffffff",
+  "id": "/AYAQPROF/",
+  "description": "AYAQPROF Football Manager",
+  "lang": "kk",
+  "categories": [
+    "games",
+    "sports"
+  ]
+}
