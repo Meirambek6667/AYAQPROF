@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>АЯҚPROF - Football Manager</title>
+    <!-- Бұл жерде манифест файлы міндетті түрде тұруы керек -->
+    <link rel="manifest" href="manifest.json">
     <style>
         *, *::before, *::after { box-sizing: border-box; }
         :root {
@@ -141,18 +143,14 @@
         </div>
 
         <div class="card">
-            <h4 style="font-size: 11px; color: var(--text-secondary); margin-bottom: 6px; text-transform: uppercase;">🎨 Стадион / Қолданба фондарын таңдау:</h4>
+            <h4 style="font-size: 11px; color: var(--text-secondary); margin-bottom: 6px; text-transform: uppercase;">🎨 Стадион фон стилі:</h4>
             <div class="grid-2" style="gap: 5px;">
                 <button onclick="setTheme('dark')" class="btn-gray" style="background:#161b22; font-size:10px;">⬛ Қараңғы стандарт</button>
                 <button onclick="setTheme('liverpool')" class="btn-gray" style="background:#c8102e; color:#fff; font-size:10px;">🔴 Ливерпуль</button>
                 <button onclick="setTheme('barca')" class="btn-gray" style="background:#004d98; color:#edbb00; font-size:10px;">🔵🔴 Барселона</button>
                 <button onclick="setTheme('real')" class="btn-gray" style="background:#1b2332; color:#cca754; font-size:10px;">⚪ Реал Мадрид</button>
-                <button onclick="setTheme('dortmund')" class="btn-gray" style="background:#fde100; color:#000; font-size:10px;">🟡 Боруссия Дортмунд</button>
-                <button onclick="setTheme('neon')" class="btn-gray" style="background:#050505; color:#00ffcc; border-color:#00ffcc; font-size:10px;">⚡ Неон стиль</button>
                 <button onclick="setTheme('emerald')" class="btn-gray" style="background:#022c22; color:#34d399; font-size:10px;">🟢 Зүмрәт газон</button>
-                <button onclick="setTheme('sunset')" class="btn-gray" style="background:#2d1537; color:#f472b6; font-size:10px;">🌆 Кешкі закат</button>
-                <button onclick="setTheme('galaxy')" class="btn-gray" style="background:#0f172a; color:#38bdf8; font-size:10px;">🌌 Галактика</button>
-                <button onclick="setTheme('gold')" class="btn-gray" style="background:#261f07; color:#fbbf24; font-size:10px;">👑 Чемпион алтыны</button>
+                <button onclick="setTheme('neon')" class="btn-gray" style="background:#050505; color:#00ffcc; border-color:#00ffcc; font-size:10px;">⚡ Неон стиль</button>
             </div>
         </div>
     </div>
@@ -161,12 +159,12 @@
     <div id="tab-tournaments" class="tab-content hidden">
         <div class="top-header" style="justify-content: space-between; align-items: center;">
             <h2 style="font-size: 14px; margin:0;">🏆 Турнирлер</h2>
-            <button onclick="deleteActiveTournament()" class="btn-red" style="width: auto; padding: 4px 8px; font-size: 10px;">🗑️ Ағымдағыны өшіру</button>
+            <button onclick="deleteActiveTournament()" class="btn-red" style="width: auto; padding: 4px 8px; font-size: 10px;">🗑️ Өшіру</button>
         </div>
 
         <div class="card">
             <button onclick="switchTab('new-tour')" class="btn-green" style="margin-bottom: 8px;">➕ Жаңа турнир бастау</button>
-            <h3 style="font-size: 12px; color: #3fb950; margin-bottom: 4px;">📜 Архив (Өткен турнирлерді жеке өшіру)</h3>
+            <h3 style="font-size: 12px; color: #3fb950; margin-bottom: 4px;">📜 Архив</h3>
             <div id="archive-list" style="font-size: 11px; color: var(--text-secondary);">Архив бос</div>
         </div>
     </div>
@@ -177,31 +175,23 @@
 
         <div class="card">
             <label style="font-size: 11px; color: var(--text-secondary);">Турнир атауы:</label>
-            <input type="text" id="tour-name" placeholder="Мысалы: АЯҚPROF Лигасы" value="">
+            <input type="text" id="tour-name" placeholder="Мысалы: АЯҚPROF Лигасы" value="АЯҚPROF Лигасы">
 
             <div class="grid-2" style="margin-top: 6px;">
                 <div>
                     <label style="font-size: 11px; color: var(--text-secondary);">Формат:</label>
                     <select id="tour-format" onchange="renderTeamInputs()">
-                        <option value="5">5v5 (5 ойыншы)</option>
-                        <option value="6" selected>6v6 (6 ойыншы)</option>
-                        <option value="7">7v7 (7 ойыншы)</option>
-                        <option value="8">8v8 (8 ойыншы)</option>
+                        <option value="5">5v5</option>
+                        <option value="6" selected>6v6</option>
+                        <option value="7">7v7</option>
                     </select>
                 </div>
                 <div>
-                    <label style="font-size: 11px; color: var(--text-secondary);">Тайм уақыты (мин):</label>
+                    <label style="font-size: 11px; color: var(--text-secondary);">Тайм (мин):</label>
                     <select id="tour-time">
                         <option value="5">5 минут</option>
-                        <option value="6">6 минут</option>
                         <option value="7" selected>7 минут</option>
-                        <option value="8">8 минут</option>
-                        <option value="9">9 минут</option>
                         <option value="10">10 минут</option>
-                        <option value="11">11 минут</option>
-                        <option value="12">12 минут</option>
-                        <option value="13">13 минут</option>
-                        <option value="14">14 минут</option>
                         <option value="15">15 минут</option>
                     </select>
                 </div>
@@ -209,12 +199,10 @@
 
             <div class="grid-2" style="margin-top: 6px;">
                 <div>
-                    <label style="font-size: 11px; color: var(--text-secondary);">Айналым саны:</label>
+                    <label style="font-size: 11px; color: var(--text-secondary);">Айналым:</label>
                     <select id="tour-rounds">
                         <option value="1">1 айналым</option>
                         <option value="2" selected>2 айналым</option>
-                        <option value="3">3 айналым</option>
-                        <option value="4">4 айналым</option>
                     </select>
                 </div>
                 <div>
@@ -229,19 +217,19 @@
         </div>
 
         <div class="card">
-            <h3 style="font-size: 12px; color: #3fb950; margin-bottom: 6px;">👥 Командалар мен ойыншылар (1-ші қақпашы міндетті)</h3>
+            <h3 style="font-size: 12px; color: #3fb950; margin-bottom: 6px;">👥 Командалар мен ойыншылар</h3>
             <div id="teams-inputs-container" style="display: flex; flex-direction: column; gap: 8px;"></div>
         </div>
 
         <button onclick="startTournamentPreMatch()" class="btn-green" style="padding: 11px; margin-bottom: 20px;">🚀 ТАКТИКАҒА ӨТУ</button>
     </div>
 
-    <!-- ТАКТИКА ЖӘНЕ ПОЛЯ (ӘР КОМАНДА ЖЕКЕ) -->
+    <!-- ТАКТИКА ЖӘНЕ ПОЛЯ -->
     <div id="page-pre-match" class="tab-content hidden">
         <div class="top-header">
             <div>
                 <h2 id="pre-match-title" style="font-size: 13px; margin:0; color:#58a6ff;">🛡️ Тактика құру</h2>
-                <span style="font-size: 10px; color: var(--text-secondary);">Ойыншыларды алаңда қалаған жерге жылжытыңыз</span>
+                <span style="font-size: 10px; color: var(--text-secondary);">Ойыншыларды алаңда орналастырыңыз</span>
             </div>
         </div>
 
@@ -268,12 +256,12 @@
         <button onclick="proceedNextTeamOrStartLive()" class="btn-green" style="margin-top: 6px; padding: 11px;">ОЙЫНДЫ БАСТАУ ⚽</button>
     </div>
 
-    <!-- LIVE МАТЧ ЖӘНЕ ТАБЛИЦА / КАЛЕНДАРЬ -->
+    <!-- LIVE МАТЧ -->
     <div id="tab-live" class="tab-content hidden">
         <div class="top-header">
             <div>
                 <h2 id="live-tour-name" style="font-size: 13px; margin:0;">Турнир</h2>
-                <span id="match-counter-txt" style="font-size: 10px; color: var(--text-secondary);">Матч 1 / 6</span>
+                <span id="match-counter-txt" style="font-size: 10px; color: var(--text-secondary);">Матч 1</span>
             </div>
             <button onclick="finishFullTournament()" class="btn-red" style="width: auto; padding: 4px 6px; font-size: 9px;">🏁 Аяқтау</button>
         </div>
@@ -296,8 +284,6 @@
                     <rect x="0" y="0" width="400" height="600" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="3"/>
                     <line x1="0" y1="300" x2="400" y2="300" stroke="rgba(255,255,255,0.7)" stroke-width="3"/>
                     <circle cx="200" cy="300" r="45" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="3"/>
-                    <rect x="120" y="0" width="160" height="70" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="3"/>
-                    <rect x="120" y="530" width="160" height="70" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="3"/>
                 </svg>
                 <div id="live-pitch-tokens" style="position: absolute; inset: 0; pointer-events: none;"></div>
             </div>
@@ -321,21 +307,14 @@
                 <button onclick="openCoachBoardModal()" class="btn-blue" style="padding: 7px; font-size: 10px;">📋 Тренер тақтасы</button>
                 <button onclick="endMatchEarly()" class="btn-red" style="padding: 7px; font-size: 10px;">⏱️ Ерте аяқтау</button>
             </div>
-            <button id="next-match-btn" onclick="goToNextMatchTactics()" class="btn-blue" disabled style="padding: 9px; font-size: 11px; opacity: 0.5;">➡️ Келесі ойынды бастау</button>
+            <button id="next-match-btn" onclick="goToNextMatchTactics()" class="btn-blue" disabled style="padding: 9px; font-size: 11px; opacity: 0.5;">➡️ Келесі ойын</button>
         </div>
 
         <div class="card">
             <h3 style="font-size: 11px; color: #3fb950; margin-bottom: 3px; text-transform: uppercase;">📊 Турнир кестесі</h3>
             <table>
                 <thead>
-                    <tr>
-                        <th>Команда</th>
-                        <th>О</th>
-                        <th>СГ</th>
-                        <th>ӨГ</th>
-                        <th>АЗ</th>
-                        <th>Ұпай</th>
-                    </tr>
+                    <tr><th>Команда</th><th>О</th><th>СГ</th><th>ӨГ</th><th>АЗ</th><th>Ұпай</th></tr>
                 </thead>
                 <tbody id="standings-tbody"></tbody>
             </table>
@@ -348,13 +327,13 @@
 
         <div class="card">
             <h3 style="font-size: 11px; color: #58a6ff; margin-bottom: 3px; text-transform: uppercase;">🔥 Үздік бомбардирлер</h3>
-            <div id="scorers-list" style="font-size: 10px; color: var(--text-secondary);">Әзірге статистика жоқ</div>
+            <div id="scorers-list" style="font-size: 10px; color: var(--text-secondary);">Статистика жоқ</div>
         </div>
     </div>
 
-    <!-- 3. МАТЧ БЕТІ (2 КОМАНДАЛЫҚ ЕРКІН МАТЧ) -->
+    <!-- 3. ЕРКІН МАТЧ БЕТІ -->
     <div id="tab-match" class="tab-content hidden">
-        <div class="top-header"><h2 style="font-size: 14px; margin:0;">⚡ Еркін матч режимі (2 команда)</h2></div>
+        <div class="top-header"><h2 style="font-size: 14px; margin:0;">⚡ Еркін матч режимі</h2></div>
         
         <div class="card" id="st-setup-card">
             <div class="grid-2" style="margin-bottom:6px;">
@@ -370,22 +349,19 @@
                     <label style="font-size: 11px; color: var(--text-secondary);">Тайм (мин):</label>
                     <select id="st-time">
                         <option value="5">5 минут</option>
-                        <option value="6">6 минут</option>
                         <option value="7" selected>7 минут</option>
-                        <option value="8">8 минут</option>
                         <option value="10">10 минут</option>
-                        <option value="15">15 минут</option>
                     </select>
                 </div>
             </div>
 
             <div class="grid-2">
                 <div>
-                    <input type="text" id="st-name-0" placeholder="1-ші Команда" value="Команда А">
+                    <input type="text" id="st-name-0" placeholder="Команда А" value="Команда А">
                     <div id="st-roster-0" style="margin-top:4px; display:flex; flex-direction:column; gap:3px;"></div>
                 </div>
                 <div>
-                    <input type="text" id="st-name-1" placeholder="2-ші Команда" value="Команда Б">
+                    <input type="text" id="st-name-1" placeholder="Команда Б" value="Команда Б">
                     <div id="st-roster-1" style="margin-top:4px; display:flex; flex-direction:column; gap:3px;"></div>
                 </div>
             </div>
@@ -410,8 +386,6 @@
                     <rect x="0" y="0" width="400" height="600" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="3"/>
                     <line x1="0" y1="300" x2="400" y2="300" stroke="rgba(255,255,255,0.7)" stroke-width="3"/>
                     <circle cx="200" cy="300" r="45" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="3"/>
-                    <rect x="120" y="0" width="160" height="70" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="3"/>
-                    <rect x="120" y="530" width="160" height="70" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="3"/>
                 </svg>
                 <div id="st-pitch-tokens" style="position: absolute; inset: 0;"></div>
             </div>
@@ -442,7 +416,7 @@
     <div id="tab-stats" class="tab-content hidden">
         <div class="top-header"><h2 style="font-size: 14px; margin:0;">📈 Статистика және Архив</h2></div>
         <div class="card">
-            <h3 style="font-size: 12px; color: #3fb950; margin-bottom: 4px;">🏆 Аяқталған турнирлер тізімі (Жеке өшіру)</h3>
+            <h3 style="font-size: 12px; color: #3fb950; margin-bottom: 4px;">🏆 Аяқталған турнирлер</h3>
             <div id="stats-archive-list" style="font-size: 11px; color: var(--text-secondary);">Архив бос</div>
         </div>
         <div class="card hidden" id="stats-detail-card">
@@ -469,7 +443,7 @@
             <p style="font-size: 11px; color: var(--text-secondary); margin:0;"><b>АЯҚPROF - Football Manager</b><br>Авторы: Парсаханов Мейрамбек<br>Барлық құқықтар қорғалған © 2026</p>
         </div>
         <div class="card">
-            <button onclick="if(confirm('Барлық деректерді өшіресіз бе?')) { localStorage.clear(); location.reload(); }" class="btn-red">🗑️ Толық сброс (Барлық деректі жою)</button>
+            <button onclick="if(confirm('Барлық деректерді өшіресіз бе?')) { localStorage.clear(); location.reload(); }" class="btn-red">🗑️ Толық сброс</button>
         </div>
     </div>
 
@@ -482,23 +456,22 @@
         </div>
     </div>
 
-    <!-- ҚЫЗЫЛ ҚАҒАЗ ЕСКЕРТУ МОДАЛКАСЫ -->
+    <!-- ҚЫЗЫЛ ҚАҒАЗ ЕСКЕРТУІ -->
     <div id="red-alert-modal" class="modal hidden">
         <div class="modal-content" style="text-align: center;">
             <h3 style="font-size: 14px; color: #da3633; margin-bottom: 8px;">🟥 ҚЫЗЫЛ ҚАҒАЗ ЕСКЕРТУІ</h3>
             <p id="red-alert-text" style="font-size: 12px; margin-bottom: 12px; color: var(--text-main);"></p>
             <div style="display: flex; flex-direction: column; gap: 6px;">
-                <button onclick="forgiveRedCardPlayer()" class="btn-yellow" style="padding: 8px;">Ойыншыны кешіру (Ойнату)</button>
+                <button onclick="forgiveRedCardPlayer()" class="btn-yellow" style="padding: 8px;">Ойыншыны кешіру</button>
                 <button onclick="promptNewPlayerForRed()" class="btn-blue" style="padding: 8px;">Жаңа ойыншы енгізу</button>
             </div>
         </div>
     </div>
 
-    <!-- ЖАҢА ОЙЫНШЫ ЕНГІЗУ МОДАЛКАСЫ -->
+    <!-- ЖАҢА ОЙЫНШЫ ҚОСУ -->
     <div id="new-player-modal" class="modal hidden">
         <div class="modal-content">
             <h3 style="font-size: 13px; color: #3fb950; margin-bottom: 6px;">➕ Жаңа ойыншы қосу</h3>
-            <p style="font-size: 11px; color: var(--text-secondary); margin-bottom: 6px;">Қызыл қағаз алған ойыншының орнына келетін жаңа ойыншының атын жазыңыз:</p>
             <input type="text" id="new-player-name-input" placeholder="Ойыншы аты" style="margin-bottom: 8px;">
             <button onclick="confirmNewPlayerAddition()" class="btn-green" style="padding: 8px;">Қосу және жалғастыру</button>
         </div>
@@ -508,7 +481,7 @@
     <div id="coach-modal" class="modal hidden">
         <div class="modal-content" style="max-width: 360px;">
             <div style="display: flex; justify-content: space-between; align-items:center; margin-bottom: 6px;">
-                <h3 style="font-size: 12px; color: #58a6ff; margin:0;">📋 Тренер тақтасы (Сызу және тактика)</h3>
+                <h3 style="font-size: 12px; color: #58a6ff; margin:0;">📋 Тренер тақтасы</h3>
                 <button onclick="closeCoachModal()" class="btn-gray" style="width: auto; padding: 3px 6px; font-size: 9px;">✕</button>
             </div>
             <div style="margin-bottom:6px; display:flex; gap:4px;">
@@ -675,18 +648,6 @@
         }
     }
 
-    // Архивтегі белгілі бір турнирді жеке өшіру функциясы
-    function deleteArchivedTournament(index) {
-        let tourName = archiveList[index]?.tourName || `Турнир ${index+1}`;
-        if(confirm(`"${tourName}" турнирін архивтен өшіресіз бе?`)) {
-            archiveList.splice(index, 1);
-            localStorage.setItem('ayaq_prof_archive', JSON.stringify(archiveList));
-            document.getElementById('stats-detail-card').classList.add('hidden');
-            renderArchiveLists();
-            alert('Турнир архивтен сәтті өшірілді.');
-        }
-    }
-
     function setTeamCount(cnt) {
         teamCount = cnt;
         for(let i=3; i<=5; i++) {
@@ -746,7 +707,6 @@
             teams.push({ name, roster, slots, color: teamColors[i % teamColors.length], played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0, gd: 0, points: 0 });
         }
 
-        let fixtures = [];
         let baseFixtures = [];
         for(let i=0; i<teams.length; i++) {
             for(let j=i+1; j<teams.length; j++) {
@@ -754,24 +714,17 @@
             }
         }
 
+        let fixtures = [];
         for(let r=0; r<rounds; r++) {
             if(r % 2 === 0) {
-                baseFixtures.forEach(f => {
-                    fixtures.push({ teamAIdx: f.teamAIdx, teamBIdx: f.teamBIdx, scoreA: null, scoreB: null, played: false });
-                });
+                baseFixtures.forEach(f => fixtures.push({ teamAIdx: f.teamAIdx, teamBIdx: f.teamBIdx, scoreA: null, scoreB: null, played: false }));
             } else {
-                baseFixtures.forEach(f => {
-                    fixtures.push({ teamAIdx: f.teamBIdx, teamBIdx: f.teamAIdx, scoreA: null, scoreB: null, played: false });
-                });
+                baseFixtures.forEach(f => fixtures.push({ teamAIdx: f.teamBIdx, teamBIdx: f.teamAIdx, scoreA: null, scoreB: null, played: false }));
             }
         }
 
-        appState = {
-            tourName, format, timeMin: timeMin * 60, rounds, teams, fixtures,
-            currentFixtureIdx: 0, isFinished: false
-        };
+        appState = { tourName, format, timeMin: timeMin * 60, rounds, teams, fixtures, currentFixtureIdx: 0, isFinished: false };
         localStorage.setItem('ayaq_prof_state', JSON.stringify(appState));
-
         checkRedCardAlertBeforeTactics();
     }
 
@@ -781,7 +734,6 @@
     function checkRedCardAlertBeforeTactics() {
         let fix = appState.fixtures[appState.currentFixtureIdx];
         pendingRedCheckQueue = [];
-        
         [fix.teamAIdx, fix.teamBIdx].forEach(tIdx => {
             let team = appState.teams[tIdx];
             team.roster.forEach(pl => {
@@ -790,19 +742,14 @@
                 }
             });
         });
-
         processNextRedAlert();
     }
 
     function processNextRedAlert() {
-        if(pendingRedCheckQueue.length === 0) {
-            openPreMatchTacticsView();
-            return;
-        }
+        if(pendingRedCheckQueue.length === 0) { openPreMatchTacticsView(); return; }
         currentRedCheckContext = pendingRedCheckQueue.shift();
         let teamName = appState.teams[currentRedCheckContext.teamIdx].name;
         let pName = currentRedCheckContext.player.name;
-
         document.getElementById('red-alert-text').innerText = `⚠️ "${teamName}" командасының ойыншысы "${pName}" алдыңғы ойында қызыл қағаз алған!`;
         document.getElementById('red-alert-modal').classList.remove('hidden');
     }
@@ -824,68 +771,37 @@
 
     function confirmNewPlayerAddition() {
         let newName = document.getElementById('new-player-name-input').value.trim();
-        if(!newName) {
-            alert('Ойыншы атын енгізіңіз!');
-            return;
-        }
+        if(!newName) { alert('Ойыншы атын енгізіңіз!'); return; }
         let tIdx = currentRedCheckContext.teamIdx;
         let team = appState.teams[tIdx];
-        
-        let oldPl = currentRedCheckContext.player;
-        oldPl.suspendedUntilMatch = appState.currentFixtureIdx;
-        
-        let newPl = { name: newName, goals: 0, assists: 0, yellow: 0, red: 0, suspendedUntilMatch: -1 };
-        team.roster.push(newPl);
-
-        let slotIdx = team.slots.findIndex(s => s.playerName === oldPl.name);
-        if(slotIdx !== -1) {
-            team.slots[slotIdx].playerName = newName;
-        } else {
-            team.slots.push({ posX: 50, posY: (tIdx === appState.fixtures[appState.currentFixtureIdx].teamAIdx ? 80 : 20), playerName: newName });
-        }
-
+        currentRedCheckContext.player.suspendedUntilMatch = appState.currentFixtureIdx;
+        team.roster.push({ name: newName, goals: 0, assists: 0, yellow: 0, red: 0, suspendedUntilMatch: -1 });
+        let slotIdx = team.slots.findIndex(s => s.playerName === currentRedCheckContext.player.name);
+        if(slotIdx !== -1) team.slots[slotIdx].playerName = newName;
         document.getElementById('new-player-modal').classList.add('hidden');
         localStorage.setItem('ayaq_prof_state', JSON.stringify(appState));
-        alert(`✅ Жаңа ойыншы "${newName}" командаға қосылды!`);
         processNextRedAlert();
     }
 
     function getDefaultSlotsForHalf(format, side, formation = 'default') {
         if(side === 'bottom') {
-            if(formation === '1-3-2') {
-                return [{posX:50,posY:88}, {posX:25,posY:72}, {posX:50,posY:72}, {posX:75,posY:72}, {posX:35,posY:55}, {posX:65,posY:55}];
-            }
-            if(formation === 'romb') {
-                return [{posX:50,posY:88}, {posX:50,posY:75}, {posX:30,posY:65}, {posX:70,posY:65}, {posX:50,posY:55}, {posX:50,posY:45}];
-            }
             if(format === 5) return [{posX:50,posY:88}, {posX:30,posY:70}, {posX:70,posY:70}, {posX:30,posY:58}, {posX:70,posY:58}];
             if(format === 6) return [{posX:50,posY:88}, {posX:30,posY:72}, {posX:70,posY:72}, {posX:30,posY:58}, {posX:70,posY:58}, {posX:50,posY:52}];
-            if(format === 7) return [{posX:50,posY:88}, {posX:20,posY:72}, {posX:50,posY:72}, {posX:80,posY:72}, {posX:35,posY:58}, {posX:65,posY:58}, {posX:50,posY:52}];
-            return [{posX:50,posY:88}, {posX:20,posY:75}, {posX:50,posY:75}, {posX:80,posY:75}, {posX:30,posY:58}, {posX:70,posY:58}, {posX:35,posY:50}, {posX:65,posY:50}];
+            return [{posX:50,posY:88}, {posX:20,posY:72}, {posX:50,posY:72}, {posX:80,posY:72}, {posX:35,posY:58}, {posX:65,posY:58}, {posX:50,posY:52}];
         } else {
-            if(formation === '1-3-2') {
-                return [{posX:50,posY:12}, {posX:25,posY:28}, {posX:50,posY:28}, {posX:75,posY:28}, {posX:35,posY:45}, {posX:65,posY:45}];
-            }
-            if(formation === 'romb') {
-                return [{posX:50,posY:12}, {posX:50,posY:25}, {posX:30,posY:35}, {posX:70,posY:35}, {posX:50,posY:45}, {posX:50,posY:55}];
-            }
             if(format === 5) return [{posX:50,posY:12}, {posX:30,posY:30}, {posX:70,posY:30}, {posX:30,posY:42}, {posX:70,posY:42}];
             if(format === 6) return [{posX:50,posY:12}, {posX:30,posY:28}, {posX:70,posY:28}, {posX:30,posY:42}, {posX:70,posY:42}, {posX:50,posY:48}];
-            if(format === 7) return [{posX:50,posY:12}, {posX:20,posY:28}, {posX:50,posY:28}, {posX:80,posY:28}, {posX:35,posY:42}, {posX:65,posY:42}, {posX:50,posY:48}];
-            return [{posX:50,posY:12}, {posX:20,posY:25}, {posX:50,posY:25}, {posX:80,posY:25}, {posX:30,posY:42}, {posX:70,posY:42}, {posX:35,posY:50}, {posX:65,posY:50}];
+            return [{posX:50,posY:12}, {posX:20,posY:28}, {posX:50,posY:28}, {posX:80,posY:28}, {posX:35,posY:42}, {posX:65,posY:42}, {posX:50,posY:48}];
         }
     }
 
     function openPreMatchTacticsView() {
         document.querySelectorAll('.tab-content').forEach(e => e.classList.add('hidden'));
         document.getElementById('page-pre-match').classList.remove('hidden');
-
         let fix = appState.fixtures[appState.currentFixtureIdx];
         preMatchTeamIndex = fix.teamAIdx;
-        
         ensureTeamSideSlots(fix.teamAIdx, 'bottom');
         ensureTeamSideSlots(fix.teamBIdx, 'top');
-
         updatePreMatchTabs();
         renderPreMatchPitch();
     }
@@ -895,13 +811,6 @@
         if(!team.slots || team.slots.length === 0) {
             team.slots = getDefaultSlotsForHalf(appState.format, side);
             team.slots.forEach((s, sIdx) => { if(team.roster[sIdx]) s.playerName = team.roster[sIdx].name; });
-            return;
-        }
-        let avgY = team.slots.reduce((acc, s) => acc + s.posY, 0) / team.slots.length;
-        if((side === 'bottom' && avgY < 50) || (side === 'top' && avgY > 50)) {
-            team.slots.forEach(s => {
-                s.posY = 100 - s.posY;
-            });
         }
     }
 
@@ -922,10 +831,8 @@
         let fix = appState.fixtures[appState.currentFixtureIdx];
         let tA = appState.teams[fix.teamAIdx];
         let tB = appState.teams[fix.teamBIdx];
-
         document.getElementById('pre-match-title').innerText = `🛡️ Тактика: ${appState.teams[preMatchTeamIndex].name}`;
-        let tabs = document.getElementById('pre-match-team-tabs');
-        tabs.innerHTML = `
+        document.getElementById('pre-match-team-tabs').innerHTML = `
             <button onclick="preMatchTeamIndex=${fix.teamAIdx}; updatePreMatchTabs(); renderPreMatchPitch();" class="${preMatchTeamIndex===fix.teamAIdx?'btn-green':'btn-gray'}" style="font-size:10px; padding:5px; flex:1; border:2px solid ${tA.color}">${tA.name}</button>
             <button onclick="preMatchTeamIndex=${fix.teamBIdx}; updatePreMatchTabs(); renderPreMatchPitch();" class="${preMatchTeamIndex===fix.teamBIdx?'btn-green':'btn-gray'}" style="font-size:10px; padding:5px; flex:1; border:2px solid ${tB.color}">${tB.name}</button>
         `;
@@ -935,28 +842,17 @@
         let team = appState.teams[preMatchTeamIndex];
         let cont = document.getElementById('pre-match-tokens');
         cont.innerHTML = '';
-
         team.slots.forEach((slot, sIdx) => {
-            let px = slot.posX !== undefined ? slot.posX : 50;
-            let py = slot.posY !== undefined ? slot.posY : 50;
+            let px = slot.posX ?? 50, py = slot.posY ?? 50;
             slot.posX = px; slot.posY = py;
-
             let pl = team.roster.find(p => p.name === slot.playerName);
             if(pl && pl.red > 0) return;
-
-            let cardBadge = '';
-            if(pl) {
-                if(pl.red > 0) cardBadge = ' 🟥';
-                else if(pl.yellow > 0) cardBadge = ' 🟨';
-            }
-
+            let cardBadge = pl?.red > 0 ? ' 🟥' : (pl?.yellow > 0 ? ' 🟨' : '');
             let el = document.createElement('div');
             el.className = 'player-circle';
-            el.style.left = px + '%';
-            el.style.top = py + '%';
+            el.style.left = px + '%'; el.style.top = py + '%';
             el.style.background = team.color;
             el.innerHTML = `<span>${sIdx+1}</span><div class="player-label">${slot.playerName || ('Ойыншы ' + (sIdx+1))}${cardBadge}</div>`;
-
             makeDraggable(el, slot, cont);
             cont.appendChild(el);
         });
@@ -991,17 +887,14 @@
         let fix = appState.fixtures[appState.currentFixtureIdx];
         let tA = appState.teams[fix.teamAIdx];
         let tB = appState.teams[fix.teamBIdx];
-
         document.getElementById('live-tour-name').innerText = appState.tourName;
         document.getElementById('match-counter-txt').innerText = `Матч ${appState.currentFixtureIdx+1} / ${appState.fixtures.length}`;
-
         document.getElementById('live-team-a-name').innerText = tA.name;
         document.getElementById('live-team-a-name').style.color = tA.color;
         document.getElementById('live-team-b-name').innerText = tB.name;
         document.getElementById('live-team-b-name').style.color = tB.color;
-        document.getElementById('live-score-a').innerText = fix.scoreA !== null ? fix.scoreA : 0;
-        document.getElementById('live-score-b').innerText = fix.scoreB !== null ? fix.scoreB : 0;
-
+        document.getElementById('live-score-a').innerText = fix.scoreA ?? 0;
+        document.getElementById('live-score-b').innerText = fix.scoreB ?? 0;
         timeLeft = appState.timeMin || 420;
         updateTimerDisplay();
         renderLivePitch();
@@ -1016,45 +909,31 @@
         let tB = appState.teams[fix.teamBIdx];
         let cont = document.getElementById('live-pitch-tokens');
         cont.innerHTML = '';
-
         tA.slots.forEach((s, idx) => {
             let pl = tA.roster.find(p => p.name === s.playerName);
-            if(pl && pl.red > 0) return; 
-            let px = s.posX !== undefined ? s.posX : 50;
-            let py = s.posY !== undefined ? s.posY : 75;
-            let pName = s.playerName || ('Ойыншы ' + (idx+1));
-            let cardBadge = pl?.yellow > 0 ? ' 🟨' : '';
-            cont.innerHTML += `<div class="player-circle" style="left:${px}%; top:${py}%; background:${tA.color};"><span>${idx+1}</span><div class="player-label">${pName}${cardBadge}</div></div>`;
+            if(pl && pl.red > 0) return;
+            let px = s.posX ?? 50, py = s.posY ?? 75;
+            let badge = pl?.yellow > 0 ? ' 🟨' : '';
+            cont.innerHTML += `<div class="player-circle" style="left:${px}%; top:${py}%; background:${tA.color};"><span>${idx+1}</span><div class="player-label">${s.playerName || ('Ойыншы ' + (idx+1))}${badge}</div></div>`;
         });
         tB.slots.forEach((s, idx) => {
             let pl = tB.roster.find(p => p.name === s.playerName);
-            if(pl && pl.red > 0) return; 
-            let px = s.posX !== undefined ? s.posX : 50;
-            let py = s.posY !== undefined ? s.posY : 25;
-            let pName = s.playerName || ('Ойыншы ' + (idx+1));
-            let cardBadge = pl?.yellow > 0 ? ' 🟨' : '';
-            cont.innerHTML += `<div class="player-circle" style="left:${px}%; top:${py}%; background:${tB.color};"><span>${idx+1}</span><div class="player-label">${pName}${cardBadge}</div></div>`;
+            if(pl && pl.red > 0) return;
+            let px = s.posX ?? 50, py = s.posY ?? 25;
+            let badge = pl?.yellow > 0 ? ' 🟨' : '';
+            cont.innerHTML += `<div class="player-circle" style="left:${px}%; top:${py}%; background:${tB.color};"><span>${idx+1}</span><div class="player-label">${s.playerName || ('Ойыншы ' + (idx+1))}${badge}</div></div>`;
         });
     }
 
     function startTimer() {
         if(timerInterval) return;
         timerInterval = setInterval(() => {
-            if(timeLeft > 0) {
-                timeLeft--;
-                updateTimerDisplay();
-            } else {
-                pauseTimer();
-                alert('Матч уақыты аяқталды!');
-                endMatchEarly();
-            }
+            if(timeLeft > 0) { timeLeft--; updateTimerDisplay(); }
+            else { pauseTimer(); alert('Матч аяқталды!'); endMatchEarly(); }
         }, 1000);
     }
 
-    function pauseTimer() {
-        clearInterval(timerInterval);
-        timerInterval = null;
-    }
+    function pauseTimer() { clearInterval(timerInterval); timerInterval = null; }
 
     function updateTimerDisplay() {
         let m = Math.floor(timeLeft / 60).toString().padStart(2, '0');
@@ -1065,8 +944,7 @@
     let activeScoringTeam = null;
     function openGoalModal() {
         let fix = appState.fixtures[appState.currentFixtureIdx];
-        let mList = document.getElementById('modal-list');
-        mList.innerHTML = `
+        document.getElementById('modal-list').innerHTML = `
             <button onclick="selectGoalTeam(${fix.teamAIdx})" class="btn-green" style="padding:7px; background:${appState.teams[fix.teamAIdx].color}; color:#000;">${appState.teams[fix.teamAIdx].name}</button>
             <button onclick="selectGoalTeam(${fix.teamBIdx})" class="btn-blue" style="padding:7px; margin-top:3px; background:${appState.teams[fix.teamBIdx].color}; color:#000;">${appState.teams[fix.teamBIdx].name}</button>
         `;
@@ -1080,10 +958,9 @@
         let mList = document.getElementById('modal-list');
         mList.innerHTML = '';
         document.getElementById('modal-title').innerText = `${team.name}: Гол авторы`;
-
         team.roster.forEach(pl => {
             if(pl.red > 0) {
-                mList.innerHTML += `<button class="btn-gray" disabled style="padding:7px; text-align:left; text-decoration:line-through; opacity:0.5;">⚽ ${pl.name} (Қызыл қағаз)</button>`;
+                mList.innerHTML += `<button class="btn-gray" disabled style="padding:7px; text-align:left; opacity:0.5;">⚽ ${pl.name} (Қызыл)</button>`;
             } else {
                 let badge = pl.yellow > 0 ? ' 🟨' : '';
                 mList.innerHTML += `<button onclick="confirmGoalPlayer('${pl.name}')" class="btn-gray" style="padding:7px; text-align:left;">⚽ ${pl.name}${badge}</button>`;
@@ -1095,19 +972,12 @@
         let fix = appState.fixtures[appState.currentFixtureIdx];
         if(fix.scoreA === null) fix.scoreA = 0;
         if(fix.scoreB === null) fix.scoreB = 0;
-
-        if(activeScoringTeam === fix.teamAIdx) fix.scoreA++;
-        else fix.scoreB++;
-
-        let team = appState.teams[activeScoringTeam];
-        let pl = team.roster.find(p => p.name === pName);
+        if(activeScoringTeam === fix.teamAIdx) fix.scoreA++; else fix.scoreB++;
+        let pl = appState.teams[activeScoringTeam].roster.find(p => p.name === pName);
         if(pl && pl.red === 0) pl.goals++;
-
         playSound('goal');
-
         updateStandingsLive();
         renderScorers();
-
         closeModal();
         renderLiveScreen();
         localStorage.setItem('ayaq_prof_state', JSON.stringify(appState));
@@ -1115,8 +985,7 @@
 
     function openAssistModal() {
         let fix = appState.fixtures[appState.currentFixtureIdx];
-        let mList = document.getElementById('modal-list');
-        mList.innerHTML = `
+        document.getElementById('modal-list').innerHTML = `
             <button onclick="selectAssistTeam(${fix.teamAIdx})" class="btn-green" style="padding:7px; background:${appState.teams[fix.teamAIdx].color}; color:#000;">${appState.teams[fix.teamAIdx].name}</button>
             <button onclick="selectAssistTeam(${fix.teamBIdx})" class="btn-blue" style="padding:7px; margin-top:3px; background:${appState.teams[fix.teamBIdx].color}; color:#000;">${appState.teams[fix.teamBIdx].name}</button>
         `;
@@ -1131,21 +1000,18 @@
         document.getElementById('modal-title').innerText = `${team.name}: Асист авторы`;
         team.roster.forEach(pl => {
             if(pl.red > 0) {
-                mList.innerHTML += `<button class="btn-gray" disabled style="padding:7px; text-align:left; text-decoration:line-through; opacity:0.5;">🎯 ${pl.name} (Қызыл қағаз)</button>`;
+                mList.innerHTML += `<button class="btn-gray" disabled style="padding:7px; text-align:left; opacity:0.5;">🎯 ${pl.name} (Қызыл)</button>`;
             } else {
-                let badge = pl.yellow > 0 ? ' 🟨' : '';
-                mList.innerHTML += `<button onclick="confirmAssistPlayer(${tIdx}, '${pl.name}')" class="btn-gray" style="padding:7px; text-align:left;">🎯 ${pl.name}${badge}</button>`;
+                mList.innerHTML += `<button onclick="confirmAssistPlayer(${tIdx}, '${pl.name}')" class="btn-gray" style="padding:7px; text-align:left;">🎯 ${pl.name}</button>`;
             }
         });
     }
 
     function confirmAssistPlayer(tIdx, pName) {
-        let team = appState.teams[tIdx];
-        let pl = team.roster.find(p => p.name === pName);
+        let pl = appState.teams[tIdx].roster.find(p => p.name === pName);
         if(pl && pl.red === 0) pl.assists++;
         closeModal();
         renderScorers();
-        alert(`Асист тіркелді: ${pName}`);
         localStorage.setItem('ayaq_prof_state', JSON.stringify(appState));
     }
 
@@ -1153,8 +1019,7 @@
     function openCardModal(cType) {
         activeCardType = cType;
         let fix = appState.fixtures[appState.currentFixtureIdx];
-        let mList = document.getElementById('modal-list');
-        mList.innerHTML = `
+        document.getElementById('modal-list').innerHTML = `
             <button onclick="selectCardTeam(${fix.teamAIdx})" class="btn-green" style="padding:7px; background:${appState.teams[fix.teamAIdx].color}; color:#000;">${appState.teams[fix.teamAIdx].name}</button>
             <button onclick="selectCardTeam(${fix.teamBIdx})" class="btn-blue" style="padding:7px; margin-top:3px; background:${appState.teams[fix.teamBIdx].color}; color:#000;">${appState.teams[fix.teamBIdx].name}</button>
         `;
@@ -1169,29 +1034,21 @@
         document.getElementById('modal-title').innerText = `${team.name}: Ойыншыны таңдаңыз`;
         team.roster.forEach(pl => {
             if(pl.red > 0) {
-                mList.innerHTML += `<button class="btn-gray" disabled style="padding:7px; text-align:left; text-decoration:line-through; opacity:0.5;">${pl.name} (Алаңнан қуылған 🟥)</button>`;
+                mList.innerHTML += `<button class="btn-gray" disabled style="padding:7px; text-align:left; opacity:0.5;">${pl.name} (Қуылған)</button>`;
             } else {
-                let cardInfo = pl.yellow > 0 ? ' (1 сары бар 🟨)' : '';
-                mList.innerHTML += `<button onclick="confirmCardPlayer(${tIdx}, '${pl.name}')" class="btn-gray" style="padding:7px; text-align:left;">🟨/🟥 ${pl.name}${cardInfo}</button>`;
+                mList.innerHTML += `<button onclick="confirmCardPlayer(${tIdx}, '${pl.name}')" class="btn-gray" style="padding:7px; text-align:left;">${pl.name}</button>`;
             }
         });
     }
 
     function confirmCardPlayer(tIdx, pName) {
-        let team = appState.teams[tIdx];
-        let pl = team.roster.find(p => p.name === pName);
+        let pl = appState.teams[tIdx].roster.find(p => p.name === pName);
         if(pl) {
             if(activeCardType === 'yellow') {
                 pl.yellow++;
-                if(pl.yellow >= 2) {
-                    pl.red = 1;
-                    alert(`⚠️ ${pl.name} 2-ші сары қағаз алып, автоматты түрде ҚЫЗЫЛҚАҒАЗБЕН (🟥) алаңнан қуылды!`);
-                } else {
-                    alert(`🟨 Сары қағаз берілді: ${pl.name}`);
-                }
+                if(pl.yellow >= 2) pl.red = 1;
             } else {
                 pl.red = 1;
-                alert(`🟥 Тікелей қызыл қағаз: ${pl.name} алаңнан қуылды!`);
             }
         }
         closeModal();
@@ -1205,10 +1062,8 @@
         if(fix.scoreA === null) fix.scoreA = 0;
         if(fix.scoreB === null) fix.scoreB = 0;
         fix.played = true;
-
         document.getElementById('next-match-btn').disabled = false;
         document.getElementById('next-match-btn').style.opacity = '1';
-        alert('⏱️ Матч уақытынан бұрын аяқталды және кестеге жазылды!');
         renderStandings();
         renderCalendar();
         localStorage.setItem('ayaq_prof_state', JSON.stringify(appState));
@@ -1218,28 +1073,19 @@
         let fix = appState.fixtures[appState.currentFixtureIdx];
         let teamsCopy = JSON.parse(JSON.stringify(appState.teams));
         teamsCopy.forEach(t => { t.played = 0; t.won = 0; t.drawn = 0; t.lost = 0; t.gf = 0; t.ga = 0; t.gd = 0; t.points = 0; });
-
         appState.fixtures.forEach((f, idx) => {
-            let sA = (idx === appState.currentFixtureIdx) ? (fix.scoreA !== null ? fix.scoreA : 0) : (f.scoreA !== null ? f.scoreA : 0);
-            let sB = (idx === appState.currentFixtureIdx) ? (fix.scoreB !== null ? fix.scoreB : 0) : (f.scoreB !== null ? f.scoreB : 0);
-            
+            let sA = (idx === appState.currentFixtureIdx) ? (fix.scoreA ?? 0) : (f.scoreA ?? 0);
+            let sB = (idx === appState.currentFixtureIdx) ? (fix.scoreB ?? 0) : (f.scoreB ?? 0);
             if(f.played || idx === appState.currentFixtureIdx) {
-                let tA = teamsCopy[f.teamAIdx];
-                let tB = teamsCopy[f.teamBIdx];
+                let tA = teamsCopy[f.teamAIdx], tB = teamsCopy[f.teamBIdx];
                 tA.played++; tB.played++;
-                
-                tA.gf += sA; tA.ga += sB;
-                tB.gf += sB; tB.ga += sA;
-                
-                tA.gd = tA.gf - tA.ga;
-                tB.gd = tB.gf - tB.ga;
-
+                tA.gf += sA; tA.ga += sB; tB.gf += sB; tB.ga += sA;
+                tA.gd = tA.gf - tA.ga; tB.gd = tB.gf - tB.ga;
                 if(sA > sB) { tA.won++; tA.points += 3; tB.lost++; }
                 else if(sA < sB) { tB.won++; tB.points += 3; tA.lost++; }
                 else { tA.drawn++; tA.points += 1; tB.drawn++; tB.points += 1; }
             }
         });
-
         let sorted = [...teamsCopy].sort((a,b) => b.points - a.points || b.gd - a.gd || b.gf - a.gf);
         let tbody = document.getElementById('standings-tbody');
         tbody.innerHTML = '';
@@ -1266,20 +1112,16 @@
         localStorage.setItem('ayaq_prof_archive', JSON.stringify(archiveList));
         localStorage.removeItem('ayaq_prof_state');
         playSound('win');
-        alert('🏆 Құттықтаймыз! Турнир сәтті аяқталды және архивке сақталды!');
         switchTab('tournaments');
     }
 
-    function renderStandings() {
-        updateStandingsLive();
-    }
+    function renderStandings() { updateStandingsLive(); }
 
     function renderCalendar() {
         let box = document.getElementById('calendar-list');
         box.innerHTML = '';
         appState.fixtures.forEach((f, idx) => {
-            let tA = appState.teams[f.teamAIdx].name;
-            let tB = appState.teams[f.teamBIdx].name;
+            let tA = appState.teams[f.teamAIdx].name, tB = appState.teams[f.teamBIdx].name;
             let st = f.played ? `(${f.scoreA}:${f.scoreB}) ✅` : (idx === appState.currentFixtureIdx ? `▶️ Ойналуда` : `⏳ Күтілуде`);
             box.innerHTML += `<div>Матч ${idx+1}: ${tA} vs ${tB} — ${st}</div>`;
         });
@@ -1289,18 +1131,15 @@
         let box = document.getElementById('scorers-list');
         box.innerHTML = '';
         let allPlayers = [];
-        appState.teams.forEach(t => {
-            t.roster.forEach(p => { if(p.goals > 0 || p.assists > 0) allPlayers.push({ ...p, team: t.name }); });
-        });
+        appState.teams.forEach(t => t.roster.forEach(p => { if(p.goals > 0 || p.assists > 0) allPlayers.push({ ...p, team: t.name }); }));
         allPlayers.sort((a,b) => b.goals - a.goals || b.assists - a.assists);
-        if(allPlayers.length === 0) { box.innerHTML = 'Әзірге статистика жоқ'; return; }
+        if(allPlayers.length === 0) { box.innerHTML = 'Статистика жоқ'; return; }
         allPlayers.forEach(p => {
             let nameStyle = p.red > 0 ? 'text-decoration: line-through; color: #8b949e;' : '';
             box.innerHTML += `<div style="${nameStyle}">• ${p.name} (${p.team}) — ⚽ ${p.goals}, 🎯 ${p.assists}</div>`;
         });
     }
 
-    // ТРЕНЕР ТАҚТАСЫ
     let coachTool = 'move';
     let canvas, ctx;
     let isDrawing = false;
@@ -1317,48 +1156,27 @@
         ctx = canvas.getContext('2d');
         canvas.width = canvas.parentElement.clientWidth;
         canvas.height = canvas.parentElement.clientHeight;
-
         let fix = appState ? appState.fixtures[appState.currentFixtureIdx] : null;
-        let tA = fix ? appState.teams[fix.teamAIdx] : (stData ? stData.teams[0] : null);
-        let tB = fix ? appState.teams[fix.teamBIdx] : (stData ? stData.teams[1] : null);
+        let tA = fix ? appState.teams[fix.teamAIdx] : null;
+        let tB = fix ? appState.teams[fix.teamBIdx] : null;
         let cont = document.getElementById('coach-tokens');
         cont.innerHTML = '';
-
-        if(tA && tA.slots) {
-            tA.slots.forEach((s, idx) => {
-                let pl = tA.roster.find(p => p.name === s.playerName);
-                if(pl && pl.red > 0) return;
-                let pName = s.playerName || ('Ойыншы ' + (idx+1));
-                let badge = pl?.yellow > 0 ? ' 🟨' : '';
-                let el = document.createElement('div');
-                el.className = 'player-circle coach-tk';
-                el.style.left = s.posX + '%';
-                el.style.top = s.posY + '%';
-                el.style.background = tA.color;
-                el.style.pointerEvents = 'auto';
-                el.innerHTML = `<span>${idx+1}</span><div class="player-label">${pName}${badge}</div>`;
-                makeCoachTokenDraggable(el, cont);
-                cont.appendChild(el);
-            });
-        }
-        if(tB && tB.slots) {
-            tB.slots.forEach((s, idx) => {
-                let pl = tB.roster.find(p => p.name === s.playerName);
-                if(pl && pl.red > 0) return;
-                let pName = s.playerName || ('Ойыншы ' + (idx+1));
-                let badge = pl?.yellow > 0 ? ' 🟨' : '';
-                let el = document.createElement('div');
-                el.className = 'player-circle coach-tk';
-                el.style.left = s.posX + '%';
-                el.style.top = s.posY + '%';
-                el.style.background = tB.color;
-                el.style.pointerEvents = 'auto';
-                el.innerHTML = `<span>${idx+1}</span><div class="player-label">${pName}${badge}</div>`;
-                makeCoachTokenDraggable(el, cont);
-                cont.appendChild(el);
-            });
-        }
-
+        [tA, tB].forEach(team => {
+            if(team && team.slots) {
+                team.slots.forEach((s, idx) => {
+                    let pl = team.roster.find(p => p.name === s.playerName);
+                    if(pl && pl.red > 0) return;
+                    let el = document.createElement('div');
+                    el.className = 'player-circle coach-tk';
+                    el.style.left = s.posX + '%'; el.style.top = s.posY + '%';
+                    el.style.background = team.color;
+                    el.style.pointerEvents = 'auto';
+                    el.innerHTML = `<span>${idx+1}</span><div class="player-label">${s.playerName || ('Ойыншы ' + (idx+1))}</div>`;
+                    makeCoachTokenDraggable(el, cont);
+                    cont.appendChild(el);
+                });
+            }
+        });
         setupCoachDrawingEvents();
     }
 
@@ -1375,9 +1193,7 @@
         el.onpointerup = () => { isDrag = false; };
     }
 
-    function clearCoachCanvas() {
-        if(ctx && canvas) ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
+    function clearCoachCanvas() { if(ctx && canvas) ctx.clearRect(0, 0, canvas.width, canvas.height); }
 
     function setupCoachDrawingEvents() {
         if(!canvas) return;
@@ -1387,8 +1203,7 @@
                 ctx.beginPath();
                 let rect = canvas.getBoundingClientRect();
                 ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
-                ctx.strokeStyle = '#fbbf24';
-                ctx.lineWidth = 3;
+                ctx.strokeStyle = '#fbbf24'; ctx.lineWidth = 3;
             }
         };
         canvas.onpointermove = (e) => {
@@ -1401,10 +1216,8 @@
         canvas.onpointerup = () => { isDrawing = false; };
     }
 
-    // ЕРКІН МАТЧ РЕЖИМІ
     let stData = { format: 6, teams: [{name:'Команда А', roster:[], slots:[], color:'#ff5722'}, {name:'Команда Б', roster:[], slots:[], color:'#00bcd4'}], scoreA:0, scoreB:0 };
-    let stTimerInterval = null;
-    let stTimeLeft = 420;
+    let stTimerInterval = null, stTimeLeft = 420;
 
     function renderStandaloneInputs() {
         let fmt = parseInt(document.getElementById('st-format').value);
@@ -1413,8 +1226,7 @@
             let rBox = document.getElementById(`st-roster-${t}`);
             rBox.innerHTML = '';
             for(let p=0; p<fmt; p++) {
-                let ph = (p===0)? 'Қақпашы' : `${p+1}-ші ойыншы`;
-                rBox.innerHTML += `<input type="text" placeholder="${ph}" class="st-p-${t}" value="">`;
+                rBox.innerHTML += `<input type="text" placeholder="${p===0?'Қақпашы':(p+1)+'-ші ойыншы'}" class="st-p-${t}" value="">`;
             }
         }
     }
@@ -1423,28 +1235,12 @@
         let name0 = document.getElementById('st-name-0').value.trim();
         let name1 = document.getElementById('st-name-1').value.trim();
         let timeMin = parseInt(document.getElementById('st-time').value);
-        
-        let inputs0 = document.querySelectorAll('.st-p-0');
-        let inputs1 = document.querySelectorAll('.st-p-1');
-
-        let hasEmpty0 = Array.from(inputs0).some(inp => inp.value.trim() === '');
-        let hasEmpty1 = Array.from(inputs1).some(inp => inp.value.trim() === '');
-
-        if(!name0 || !name1 || hasEmpty0 || hasEmpty1) {
-            alert('⚠️ Барлық команда атаулары мен ойыншыларды толтырыңыз!');
-            return;
-        }
-
-        stData.teams[0].name = name0;
-        stData.teams[1].name = name1;
-
+        if(!name0 || !name1) { alert('Команда атауларын жазыңыз!'); return; }
+        stData.teams[0].name = name0; stData.teams[1].name = name1;
         for(let t=0; t<2; t++) {
             let inputs = document.querySelectorAll(`.st-p-${t}`);
             let roster = [];
-            inputs.forEach((inp, idx) => {
-                let val = inp.value.trim();
-                roster.push({ name: val, goals:0, assists:0, yellow:0, red:0 });
-            });
+            inputs.forEach((inp, idx) => roster.push({ name: inp.value.trim() || `Ойыншы ${idx+1}`, goals:0, assists:0, yellow:0, red:0 }));
             stData.teams[t].roster = roster;
             stData.teams[t].slots = getDefaultSlotsForHalf(stData.format, t===0?'bottom':'top');
             stData.teams[t].slots.forEach((s, sIdx) => { if(roster[sIdx]) s.playerName = roster[sIdx].name; });
@@ -1452,9 +1248,7 @@
         document.getElementById('st-setup-card').classList.add('hidden');
         document.getElementById('st-live-card').classList.remove('hidden');
         document.getElementById('st-lbl-a').innerText = stData.teams[0].name;
-        document.getElementById('st-lbl-a').style.color = stData.teams[0].color;
         document.getElementById('st-lbl-b').innerText = stData.teams[1].name;
-        document.getElementById('st-lbl-b').style.color = stData.teams[1].color;
         stData.scoreA = 0; stData.scoreB = 0;
         document.getElementById('st-scr-a').innerText = '0';
         document.getElementById('st-scr-b').innerText = '0';
@@ -1467,185 +1261,35 @@
         let cont = document.getElementById('st-pitch-tokens');
         if(!cont) return;
         cont.innerHTML = '';
-
-        stData.teams[0].slots.forEach((s, idx) => {
-            let pl = stData.teams[0].roster.find(p => p.name === s.playerName);
-            if(pl && pl.red > 0) return;
-            let px = s.posX !== undefined ? s.posX : 50;
-            let py = s.posY !== undefined ? s.posY : 75;
-            let pName = s.playerName || ('Ойыншы ' + (idx+1));
-            let badge = pl?.yellow > 0 ? ' 🟨' : '';
-            let el = document.createElement('div');
-            el.className = 'player-circle';
-            el.style.left = px + '%';
-            el.style.top = py + '%';
-            el.style.background = stData.teams[0].color;
-            el.innerHTML = `<span>${idx+1}</span><div class="player-label">${pName}${badge}</div>`;
-            makeCoachTokenDraggable(el, cont);
-            cont.appendChild(el);
-        });
-        stData.teams[1].slots.forEach((s, idx) => {
-            let pl = stData.teams[1].roster.find(p => p.name === s.playerName);
-            if(pl && pl.red > 0) return;
-            let px = s.posX !== undefined ? s.posX : 50;
-            let py = s.posY !== undefined ? s.posY : 25;
-            let pName = s.playerName || ('Ойыншы ' + (idx+1));
-            let badge = pl?.yellow > 0 ? ' 🟨' : '';
-            let el = document.createElement('div');
-            el.className = 'player-circle';
-            el.style.left = px + '%';
-            el.style.top = py + '%';
-            el.style.background = stData.teams[1].color;
-            el.innerHTML = `<span>${idx+1}</span><div class="player-label">${pName}${badge}</div>`;
-            makeCoachTokenDraggable(el, cont);
-            cont.appendChild(el);
+        stData.teams.forEach((team, tIdx) => {
+            team.slots.forEach((s, idx) => {
+                let pl = team.roster.find(p => p.name === s.playerName);
+                if(pl && pl.red > 0) return;
+                let px = s.posX ?? 50, py = s.posY ?? (tIdx === 0 ? 75 : 25);
+                let el = document.createElement('div');
+                el.className = 'player-circle';
+                el.style.left = px + '%'; el.style.top = py + '%';
+                el.style.background = team.color;
+                el.innerHTML = `<span>${idx+1}</span><div class="player-label">${s.playerName || ('Ойыншы ' + (idx+1))}</div>`;
+                makeCoachTokenDraggable(el, cont);
+                cont.appendChild(el);
+            });
         });
     }
 
     function stStartTimer() {
         if(stTimerInterval) return;
         stTimerInterval = setInterval(() => {
-            if(stTimeLeft > 0) {
-                stTimeLeft--;
-                updateStTimerDisplay();
-            } else {
-                stPauseTimer();
-                alert('Матч аяқталды!');
-            }
+            if(stTimeLeft > 0) { stTimeLeft--; updateStTimerDisplay(); }
+            else { stPauseTimer(); alert('Матч аяқталды!'); }
         }, 1000);
     }
-
-    function stPauseTimer() {
-        clearInterval(stTimerInterval);
-        stTimerInterval = null;
-    }
-
+    function stPauseTimer() { clearInterval(stTimerInterval); stTimerInterval = null; }
     function updateStTimerDisplay() {
         let m = Math.floor(stTimeLeft / 60).toString().padStart(2, '0');
         let s = (stTimeLeft % 60).toString().padStart(2, '0');
         let dt = document.getElementById('st-timer-txt');
         if(dt) dt.innerText = `${m}:${s}`;
-    }
-
-    let stActiveTeam = 0;
-    function stOpenGoalModal() {
-        let mList = document.getElementById('modal-list');
-        mList.innerHTML = `
-            <button onclick="stSelectGoalTeam(0)" class="btn-green" style="padding:7px; background:${stData.teams[0].color}; color:#000;">${stData.teams[0].name}</button>
-            <button onclick="stSelectGoalTeam(1)" class="btn-blue" style="padding:7px; margin-top:3px; background:${stData.teams[1].color}; color:#000;">${stData.teams[1].name}</button>
-        `;
-        document.getElementById('modal-title').innerText = 'Қай команда гол соқты?';
-        document.getElementById('action-modal').classList.remove('hidden');
-    }
-
-    function stSelectGoalTeam(tIdx) {
-        stActiveTeam = tIdx;
-        let team = stData.teams[tIdx];
-        let mList = document.getElementById('modal-list');
-        mList.innerHTML = '';
-        document.getElementById('modal-title').innerText = `${team.name}: Гол авторы`;
-        team.roster.forEach(pl => {
-            if(pl.red > 0) {
-                mList.innerHTML += `<button class="btn-gray" disabled style="padding:7px; text-align:left; text-decoration:line-through; opacity:0.5;">⚽ ${pl.name} (Қызыл қағаз)</button>`;
-            } else {
-                let badge = pl.yellow > 0 ? ' 🟨' : '';
-                mList.innerHTML += `<button onclick="stConfirmGoal('${pl.name}')" class="btn-gray" style="padding:7px; text-align:left;">⚽ ${pl.name}${badge}</button>`;
-            }
-        });
-    }
-
-    function stConfirmGoal(pName) {
-        if(stActiveTeam === 0) stData.scoreA++; else stData.scoreB++;
-        document.getElementById('st-scr-a').innerText = stData.scoreA;
-        document.getElementById('st-scr-b').innerText = stData.scoreB;
-        let pl = stData.teams[stActiveTeam].roster.find(p => p.name === pName);
-        if(pl && pl.red === 0) pl.goals++;
-        playSound('goal');
-        closeModal();
-    }
-
-    function stOpenAssistModal() {
-        let mList = document.getElementById('modal-list');
-        mList.innerHTML = `
-            <button onclick="stSelectAssistTeam(0)" class="btn-green" style="padding:7px; background:${stData.teams[0].color}; color:#000;">${stData.teams[0].name}</button>
-            <button onclick="stSelectAssistTeam(1)" class="btn-blue" style="padding:7px; margin-top:3px; background:${stData.teams[1].color}; color:#000;">${stData.teams[1].name}</button>
-        `;
-        document.getElementById('modal-title').innerText = 'Асист командасы';
-        document.getElementById('action-modal').classList.remove('hidden');
-    }
-
-    function stSelectAssistTeam(tIdx) {
-        let team = stData.teams[tIdx];
-        let mList = document.getElementById('modal-list');
-        mList.innerHTML = '';
-        document.getElementById('modal-title').innerText = `${team.name}: Асист авторы`;
-        team.roster.forEach(pl => {
-            if(pl.red > 0) {
-                mList.innerHTML += `<button class="btn-gray" disabled style="padding:7px; text-align:left; text-decoration:line-through; opacity:0.5;">🎯 ${pl.name} (Қызыл қағаз)</button>`;
-            } else {
-                let badge = pl.yellow > 0 ? ' 🟨' : '';
-                mList.innerHTML += `<button onclick="stConfirmAssist(${tIdx}, '${pl.name}')" class="btn-gray" style="padding:7px; text-align:left;">🎯 ${pl.name}${badge}</button>`;
-            }
-        });
-    }
-
-    function stConfirmAssist(tIdx, pName) {
-        let pl = stData.teams[tIdx].roster.find(p => p.name === pName);
-        if(pl && pl.red === 0) pl.assists++;
-        closeModal();
-        alert(`Асист тіркелді: ${pName}`);
-    }
-
-    let stCardType = 'yellow';
-    function stOpenCardModal(cType) {
-        stCardType = cType;
-        let mList = document.getElementById('modal-list');
-        mList.innerHTML = `
-            <button onclick="stSelectCardTeam(0)" class="btn-green" style="padding:7px; background:${stData.teams[0].color}; color:#000;">${stData.teams[0].name}</button>
-            <button onclick="stSelectCardTeam(1)" class="btn-blue" style="padding:7px; margin-top:3px; background:${stData.teams[1].color}; color:#000;">${stData.teams[1].name}</button>
-        `;
-        document.getElementById('modal-title').innerText = `${cType === 'yellow' ? '🟨 Сары' : '🟥 Қызыл'} қағаз`;
-        document.getElementById('action-modal').classList.remove('hidden');
-    }
-
-    function stSelectCardTeam(tIdx) {
-        stActiveTeam = tIdx;
-        let team = stData.teams[tIdx];
-        let mList = document.getElementById('modal-list');
-        mList.innerHTML = '';
-        document.getElementById('modal-title').innerText = `${team.name}: Ойыншыны таңдаңыз`;
-        team.roster.forEach(pl => {
-            if(pl.red > 0) {
-                mList.innerHTML += `<button class="btn-gray" disabled style="padding:7px; text-align:left; text-decoration:line-through; opacity:0.5;">${pl.name} (Алаңнан қуылған 🟥)</button>`;
-            } else {
-                let cardInfo = pl.yellow > 0 ? ' (1 сары бар 🟨)' : '';
-                mList.innerHTML += `<button onclick="stConfirmCard('${pl.name}')" class="btn-gray" style="padding:7px; text-align:left;">🟨/🟥 ${pl.name}${cardInfo}</button>`;
-            }
-        });
-    }
-
-    function stConfirmCard(pName) {
-        let pl = stData.teams[stActiveTeam].roster.find(p => p.name === pName);
-        if(pl) {
-            if(stCardType === 'yellow') {
-                pl.yellow++;
-                if(pl.yellow >= 2) {
-                    pl.red = 1;
-                    alert(`⚠️ ${pl.name} 2-ші сары қағаз алып, автоматты түрде ҚЫЗЫЛҚАҒАЗБЕН (🟥) алаңнан қуылды!`);
-                } else {
-                    alert(`🟨 Сары қағаз берілді: ${pl.name}`);
-                }
-            } else {
-                pl.red = 1;
-                alert(`🟥 Тікелей қызыл қағаз: ${pl.name} алаңнан қуылды!`);
-            }
-        }
-        closeModal();
-        renderStandalonePitch();
-    }
-
-    function stOpenCoachBoard() {
-        openCoachBoardModal();
     }
 
     function resetStandaloneMatch() {
@@ -1664,42 +1308,30 @@
         }
         if(box) box.innerHTML = '';
         if(statsBox) statsBox.innerHTML = '';
-
         archiveList.forEach((ar, idx) => {
-            let itemHtml = `
-                <div style="display: flex; gap: 4px; margin-bottom: 5px; align-items: center;">
-                    <button onclick="showArchiveDetail(${idx})" class="btn-gray" style="padding:7px; text-align:left; flex:1;">🏆 ${idx+1}. ${ar.tourName} (Аяқталды)</button>
-                    <button onclick="deleteArchivedTournament(${idx})" class="btn-red" style="width: auto; padding: 7px 10px; font-size: 10px;">🗑️ Өшіру</button>
-                </div>
-            `;
-            if(box) box.innerHTML += itemHtml;
-            if(statsBox) statsBox.innerHTML += itemHtml;
+            let btnHtml = `<button onclick="showArchiveDetail(${idx})" class="btn-gray" style="padding:7px; margin-bottom:5px; text-align:left;">🏆 ${ar.tourName} (Аяқталды)</button>`;
+            if(box) box.innerHTML += btnHtml;
+            if(statsBox) statsBox.innerHTML += btnHtml;
         });
     }
 
     function showArchiveDetail(idx) {
         let ar = archiveList[idx];
-        let card = document.getElementById('stats-detail-card');
-        card.classList.remove('hidden');
+        document.getElementById('stats-detail-card').classList.remove('hidden');
         document.getElementById('stats-det-title').innerText = `🏆 ${ar.tourName}`;
-
         let teamsCopy = JSON.parse(JSON.stringify(ar.teams));
         teamsCopy.forEach(t => { t.played = 0; t.won = 0; t.drawn = 0; t.lost = 0; t.gf = 0; t.ga = 0; t.gd = 0; t.points = 0; });
         ar.fixtures.forEach(f => {
             if(f.played && f.scoreA !== null && f.scoreB !== null) {
-                let tA = teamsCopy[f.teamAIdx];
-                let tB = teamsCopy[f.teamBIdx];
+                let tA = teamsCopy[f.teamAIdx], tB = teamsCopy[f.teamBIdx];
                 tA.played++; tB.played++;
-                tA.gf += f.scoreA; tA.ga += f.scoreB;
-                tB.gf += f.scoreB; tB.ga += f.scoreA;
-                tA.gd = tA.gf - tA.ga;
-                tB.gd = tB.gf - tB.ga;
+                tA.gf += f.scoreA; tA.ga += f.scoreB; tB.gf += f.scoreB; tB.ga += f.scoreA;
+                tA.gd = tA.gf - tA.ga; tB.gd = tB.gf - tB.ga;
                 if(f.scoreA > f.scoreB) { tA.won++; tA.points += 3; tB.lost++; }
                 else if(f.scoreA < f.scoreB) { tB.won++; tB.points += 3; tA.lost++; }
                 else { tA.drawn++; tA.points += 1; tB.drawn++; tB.points += 1; }
             }
         });
-
         let sorted = [...teamsCopy].sort((a,b) => b.points - a.points || b.gd - a.gd || b.gf - a.gf);
         let tHtml = `<table><thead><tr><th>Команда</th><th>О</th><th>СГ</th><th>ӨГ</th><th>АЗ</th><th>Ұпай</th></tr></thead><tbody>`;
         sorted.forEach(t => {
@@ -1707,18 +1339,7 @@
             tHtml += `<tr><td><span style="color:${t.color}; font-weight:bold;">■</span> <b>${t.name}</b></td><td>${t.played}</td><td>${t.gf}</td><td>${t.ga}</td><td><b>${gdSign}</b></td><td><b>${t.points}</b></td></tr>`;
         });
         tHtml += `</tbody></table>`;
-
-        let allP = [];
-        ar.teams.forEach(t => { t.roster.forEach(p => { if(p.goals > 0 || p.assists > 0) allP.push({...p, team: t.name}); }); });
-        allP.sort((a,b) => b.goals - a.goals);
-        let sHtml = `<h4 style="font-size:11px; color:#58a6ff; margin:6px 0 3px;">🔥 Үздік бомбардирлер:</h4>`;
-        if(allP.length === 0) sHtml += `<div style="font-size:10px; color:var(--text-secondary);">Голдар тіркелмеген</div>`;
-        else allP.forEach(p => {
-            let nameStyle = p.red > 0 ? 'text-decoration: line-through; color: #8b949e;' : '';
-            sHtml += `<div style="font-size:10px; ${nameStyle}">• ${p.name} (${p.team}) — ⚽ ${p.goals}, 🎯 ${p.assists}</div>`;
-        });
-
-        document.getElementById('stats-det-content').innerHTML = tHtml + sHtml;
+        document.getElementById('stats-det-content').innerHTML = tHtml;
     }
 
     function closeModal() { document.getElementById('action-modal').classList.add('hidden'); }
